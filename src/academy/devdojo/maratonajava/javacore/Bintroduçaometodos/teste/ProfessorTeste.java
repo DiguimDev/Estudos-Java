@@ -5,10 +5,12 @@ import academy.devdojo.maratonajava.javacore.Bintroduçaometodos.dominio.Profess
 public class ProfessorTeste {
     public static void main(String[] args) {
         Professor professor = new Professor();
-        professor.nome = "Jiraya";
-        professor.idade = 57;
-        professor.sexo = 'M';
-
+        professor.setNome("Jiraya");
+        professor.setIdade(57);
+        professor.setSexo('M');
         professor.imprimir();
+
+        System.out.println(professor.getNome());
+        System.out.println(professor.getIdade());
     }
 }

@@ -8,9 +8,9 @@ public class FuncionarioTeste {
         Funcionarios funcionarios = new Funcionarios();
         Impressora impressora = new Impressora();
 
-        funcionarios.nome = "Robervaldo";
-        funcionarios.idade = 37;
-        funcionarios.salario = new double[]{1234.2,1245.1,1456.2,1213.7 };
+        funcionarios.setNome("Robervaldo");
+        funcionarios.setIdade(27);
+        funcionarios.setSalario(new double[]{1234.78, 2000, 1500.12, 1200});
 
         impressora.imprimir(funcionarios);
 
