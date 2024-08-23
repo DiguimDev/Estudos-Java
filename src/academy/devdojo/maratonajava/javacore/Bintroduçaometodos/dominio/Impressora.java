@@ -10,7 +10,9 @@ public class Impressora {
             }
         for (double num: funcionarios.salario) {
            System.out.println(num);
+
        }
+        mediaSalario(funcionarios);
     }
     public void mediaSalario(Funcionarios funcionarios){
         if (funcionarios.salario == null){

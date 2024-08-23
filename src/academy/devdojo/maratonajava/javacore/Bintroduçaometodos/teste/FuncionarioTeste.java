@@ -13,7 +13,7 @@ public class FuncionarioTeste {
         funcionarios.salario = new double[]{1234.2,1245.1,1456.2,1213.7 };
 
         impressora.imprimir(funcionarios);
-        impressora.mediaSalario(funcionarios);
+
 
     }
 }
