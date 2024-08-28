@@ -1,9 +1,10 @@
-package academy.devdojo.maratonajava.javacore.Eblocosinicializaçao.domain;
+package academy.devdojo.maratonajava.javacore.Fmodificadorestatico.dominio;
 
 public class Anime {
     private String nome;
-    private int[] episodios;
-    {
+    private static int[] episodios;
+    static {
+        System.out.println("\n Dentro do bloco de inicializaçao");
         episodios = new int[100];
         for (int i = 0; i < episodios.length; i++) {
             episodios[i] = i + 1;
@@ -19,7 +20,7 @@ public class Anime {
         for (int i = 0; i < episodios.length; i++) {
             episodios[i] = i + 1;
         }
-        for(int episodio: this.episodios){
+        for(int episodio: Anime.episodios){
             System.out.print(episodio + " ");
         }
     }
