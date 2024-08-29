@@ -1,9 +1,12 @@
 package academy.devdojo.maratonajava.javacore.Jmodificadorfinal.dominio;
 
-public class final Carro {
-    private String nome;
-    public static final double VELOCIDADE_LIMITE = 250;
-    public final Comprador COMPRADOR = new Comprador();
+public class Comprador {
+   private String nome;
+
+    @Override
+    public String toString() {
+        return this.nome;
+    }
 
     public String getNome() {
         return nome;
