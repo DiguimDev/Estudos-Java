@@ -1,5 +1,5 @@
 <h1>Minha Jornada com Java</h1>
-Bem-vindo ao repositório "Minha Jornada com Java"! Este repositório é um registro da minha evolução na linguagem de programação Java.</br> Aqui, compartilho meus commits e projetos à medida que aprendo e pratico Java.
+Bem-vindo ao repositório "Estudos Java"! Este repositório é um registro da minha evolução na linguagem de programação Java.</br> Aqui, compartilho meus commits e projetos à medida que aprendo e pratico Java.
 </br>
 <h2>Objetivo</h2>
 <strong>O objetivo deste repositório é:</strong>
