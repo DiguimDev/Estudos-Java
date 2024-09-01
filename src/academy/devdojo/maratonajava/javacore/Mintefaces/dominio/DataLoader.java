@@ -6,6 +6,6 @@ public interface DataLoader {
         System.out.println("Checando permissão");
     }
     static void checkingDataLoader(){
-        System.out.println("dentro do interface Dataloader");
+        System.out.println("dentro do interface Dataloaderr");
     }
 }
