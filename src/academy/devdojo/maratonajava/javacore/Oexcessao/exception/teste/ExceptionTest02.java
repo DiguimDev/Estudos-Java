@@ -12,6 +12,9 @@ public class ExceptionTest02 {
         try{
             boolean criado = file.createNewFile();
             System.out.println("Arquivo criado "+ criado);
+            if(criado == false){
+                throw new RuntimeException("Arquivo Ja Existe");
+            }
         }catch (IOException e){
             e.printStackTrace();
             throw e;

@@ -12,7 +12,7 @@ public class RuntimeExceptionTest02 {
      * @return
      * @throws IllegalArgumentException Case B = 0;
      */
-    private static int divisao(int a , int b) throws IllegalArgumentException{
+    private static int divisao(int a , int b){
         if(b == 0){
             throw new RuntimeException("Argumento Ilegal, Não pode ser 0");
         }
