@@ -15,11 +15,16 @@ public class WrapperTest01 {
         // Regra aplicada de Polimorfismo
         Byte byteW = 1;
         Short shortW = 13;
-        Integer intW = 145;
+        Integer intW = 145; // Autoboxing
         Long longW = 1500L;
         Float floatW = 13.21F;
         Double doubleW = 15.12;
         Character charW = 'W';
         Boolean booleanW = true;
+
+        int i = intW; //Unboxing
+
+        Integer intW2 = Integer.parseInt("15");
+        Boolean verdadeiro = Boolean.parseBoolean("TRue");
     }
 }
