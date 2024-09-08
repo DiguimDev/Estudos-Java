@@ -1,6 +1,6 @@
 package academy.devdojo.maratonajava.javacore.Qstring.test;
 
-public class StringPerformanceTeste {
+public class StringPerformanceTeste01 {
     public static void main(String[] args) {
         long inicio = System.currentTimeMillis();
         concatStrig(10000);
