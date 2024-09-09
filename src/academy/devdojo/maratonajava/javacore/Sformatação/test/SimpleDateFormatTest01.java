@@ -9,3 +9,4 @@ public class SimpleDateFormatTest01 {
         System.out.println(simpleDateFormat.format(new Date()));
     }
 }
+    
