@@ -9,6 +9,15 @@ public class Smartphone {
         this.seriaNumber = seriaNumber;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) return false;
+        if (this == obj) return true;
+        if (this.getClass() != obj.getClass()) return false;
+        Smartphone smartphone = (Smartphone) obj;
+        return seriaNumber != null && seriaNumber.equals(smartphone.seriaNumber);
+    }
+
     public String getSeriaNumber() {
         return seriaNumber;
     }
