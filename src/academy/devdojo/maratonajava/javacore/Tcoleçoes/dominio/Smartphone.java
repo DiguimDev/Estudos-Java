@@ -18,6 +18,11 @@ public class Smartphone {
         return seriaNumber != null && seriaNumber.equals(smartphone.seriaNumber);
     }
 
+    @Override
+    public int hashCode() {
+        return seriaNumber == null ? 0 : this.seriaNumber.hashCode();
+    }
+
     public String getSeriaNumber() {
         return seriaNumber;
     }
