@@ -30,5 +30,6 @@ public class ListTest01 {
         for (Integer listaNumerica: listaNumerada){
             System.out.print(listaNumerica + " ");
         }
+
     }
 }

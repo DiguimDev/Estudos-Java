@@ -23,6 +23,14 @@ public class Smartphone {
         return seriaNumber == null ? 0 : this.seriaNumber.hashCode();
     }
 
+    @Override
+    public String toString() {
+        return "Smartphone{" +
+                "seriaNumber='" + seriaNumber + '\'' +
+                ", marca='" + marca + '\'' +
+                '}';
+    }
+
     public String getSeriaNumber() {
         return seriaNumber;
     }
