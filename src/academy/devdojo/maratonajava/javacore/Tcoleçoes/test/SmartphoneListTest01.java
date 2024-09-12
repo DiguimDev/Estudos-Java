@@ -12,7 +12,7 @@ public class SmartphoneListTest01 {
         Smartphone s3 = new Smartphone("Samsung", "33333");
 
         List<Smartphone> smartphoneList = new ArrayList<>(6);
-        // limpar a lista utiliza o .clean 
+        // limpar a lista utiliza o .clean
         smartphoneList.add(s1);
         smartphoneList.add(s2);
         smartphoneList.add(s3);
