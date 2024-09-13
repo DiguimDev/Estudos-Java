@@ -67,6 +67,6 @@ public class Manga implements Comparable<Manga>{
        //} else {
        //    return 1;
        //}
-        return this.id.compareTo(o.getId());
+        return this.nome.compareTo(o.getNome());
     }
 }
