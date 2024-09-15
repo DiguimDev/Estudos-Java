@@ -31,6 +31,7 @@ public class NavigableSetTest0 {
         mangas.add(new Manga(1L,"Dragon Ball",6.82, 2));
         mangas.add(new Manga(2L,"Berserk",13.65, 0));
         mangas.add(new Manga(4L,"Pokemon",12.12, 0));
+        mangas.reversed();
         for (Manga manga : mangas) {
             System.out.println(manga);
         }
