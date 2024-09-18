@@ -4,7 +4,7 @@ import academy.devdojo.maratonajava.javacore.Ugenerics.dominio.Carro;
 
 import java.util.List;
 
-public class RentalService<T> {
+public class RentalService<T>{
 
     private List<T> objetosDisponiveis;
     public RentalService(List<T> objetosDisponiveis) {
