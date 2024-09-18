@@ -1,15 +1,15 @@
 package academy.devdojo.maratonajava.javacore.Ugenerics.test;
 
-abstract class animal{
+abstract class Animal{
     public abstract void consulta();
 }
-class Cachorro extends animal{
+class Cachorro extends Animal{
     @Override
     public void consulta() {
         System.out.println("Consultando o Dog");
     }
 }
-class Gato extends animal{
+class Gato extends Animal{
 
     @Override
     public void consulta() {
@@ -23,8 +23,8 @@ public class WildCardTest01 {
         printConsulta(cachorros);
         printConsulta(gatos);
     }
-    private static void printConsulta(animal[] animals){
-        for (animal animal : animals) {
+    private static void printConsulta(Animal[] animals){
+        for (Animal animal : animals) {
             animal.consulta();
         }
 
