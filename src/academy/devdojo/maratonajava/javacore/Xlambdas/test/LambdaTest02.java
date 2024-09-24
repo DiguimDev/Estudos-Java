@@ -7,10 +7,12 @@ import java.util.function.Function;
 public class LambdaTest02 {
     public static void main(String[] args) {
         List<String> strings = List.of("Natsu", "Goku", "Naruto", "Ichigo");
-        List<Integer> map = map(strings, (String e) -> e.length());
-        List<String> upper = map(strings, s -> s.toUpperCase());
+        List<Integer> map = map(strings, String::length);
+        List<String> upper = map(strings, String::toUpperCase);
+        List<String> lower = map(strings, String::toLowerCase);
         System.out.println(map);
         System.out.println(upper);
+        System.out.println(lower);
     }
     private static <T, R> List<R> map(List<T> list, Function<T, R> function){
         List<R> result = new ArrayList<>();
