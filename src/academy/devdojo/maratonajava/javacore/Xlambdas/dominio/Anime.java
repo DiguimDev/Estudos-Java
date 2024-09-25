@@ -1,10 +1,10 @@
 package academy.devdojo.maratonajava.javacore.Xlambdas.dominio;
 
 public class Anime {
-    private String title;
-    private int quantity;
+    final private String title;
+    final private Integer quantity;
 
-    public Anime(String title, int quantity) {
+    public Anime(String title, Integer quantity) {
         this.title = title;
         this.quantity = quantity;
 
@@ -22,7 +22,7 @@ public class Anime {
         return title;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 }
