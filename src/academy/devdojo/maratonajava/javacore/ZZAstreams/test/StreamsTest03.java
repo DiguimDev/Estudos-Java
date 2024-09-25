@@ -3,11 +3,10 @@ package academy.devdojo.maratonajava.javacore.ZZAstreams.test;
 import academy.devdojo.maratonajava.javacore.ZZAstreams.dominio.LighNovel;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class StreamTest02 {
+public class StreamsTest03 {
     private static List<LighNovel> lightList = new ArrayList<>(List.of(
             new LighNovel("Bleach", 46),
             new LighNovel("One Punch Man", 99.29),
@@ -20,13 +19,16 @@ public class StreamTest02 {
     ));
 
     public static void main(String[] args) {
-        List<String> nomes = lightList.stream()
-                .sorted(Comparator.comparing(LighNovel::getNome))
-                .filter(ln -> ln.getPrice() <= 40)
-                .limit(3)
-                .map(LighNovel::getNome)
-                .collect(Collectors.toList());
+        Stream<LighNovel> stream = lightList.stream();
+        lightList.forEach(System.out::println);
+        long count = stream.filter(ln -> ln.getPrice() >= 40).count();
 
-        System.out.println(nomes);
+
+        long count2 = lightList.stream()
+                .distinct()
+                .filter(ln -> ln.getPrice() < 40)
+                .count();
+
+        System.out.println(count);
     }
 }
