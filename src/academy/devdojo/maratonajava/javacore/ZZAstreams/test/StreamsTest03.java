@@ -30,5 +30,6 @@ public class StreamsTest03 {
                 .count();
 
         System.out.println(count);
+        System.out.println(count2);
     }
 }
