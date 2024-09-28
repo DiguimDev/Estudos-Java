@@ -5,10 +5,17 @@ import java.util.Objects;
 public class LighNovel {
     private String nome;
     private double price;
+    private Category category;
 
     public LighNovel(String nome, double price) {
         this.nome = nome;
         this.price = price;
+    }
+
+    public LighNovel(String nome, double price, Category category) {
+        this.nome = nome;
+        this.price = price;
+        this.category = category;
     }
 
     @Override
@@ -29,7 +36,12 @@ public class LighNovel {
         return "LighNovel{" +
                 "nome='" + nome + '\'' +
                 ", price=" + price +
+                ", category=" + category +
                 '}';
+    }
+
+    public Category getCategory() {
+        return category;
     }
 
     public String getNome() {
@@ -39,4 +51,5 @@ public class LighNovel {
     public double getPrice() {
         return price;
     }
+
 }
