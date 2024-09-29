@@ -1,10 +1,10 @@
 package academy.devdojo.maratonajava.javacore.ZZBpadroesdeprojetos.dominio;
 
 public class Person {
-    private String firstName;
-    private String lastName;
-    private String userName;
-    private String email;
+    final private String firstName;
+    final private String lastName;
+    final private String userName;
+    final private String email;
 
     private Person(String firstName, String lastName, String userName, String email) {
         this.firstName = firstName;
