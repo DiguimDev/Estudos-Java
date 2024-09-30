@@ -10,26 +10,38 @@ import java.sql.Statement;
 
 @Log4j2
 public class ProducerRepository {
-    public static void save(Producer producer){
+    public static void save(Producer producer) {
         String sql = "INSERT INTO `anime_store`. `producer` (`name`) VALUES ('%s');".formatted(producer.getName());
-        try(Connection conn = ConectionFactory.getConnection();
-            Statement stmt = conn.createStatement()){
+        try (Connection conn = ConectionFactory.getConnection();
+             Statement stmt = conn.createStatement()) {
             int rowsAffected = stmt.executeUpdate(sql);
-            log.info("Insert producer '{}' in the database, rows affected {}",producer.getName(),rowsAffected);
+            log.info("Insert producer '{}' in the database, rows affected {}", producer.getName(), rowsAffected);
         } catch (SQLException e) {
-            log.error("Error while trying to insert producer '{}'",producer.getName(),e);
+            log.error("Error while trying to insert producer '{}'", producer.getName(), e);
             e.printStackTrace();
         }
     }
-    public static void delete(int id){
+
+    public static void delete(int id) {
         String sql = "DELETE FROM `anime_store`. `producer` WHERE(`id` = '%s')".formatted(id);
-        try(Connection conn = ConectionFactory.getConnection();
-            Statement stmt = conn.createStatement()){
+        try (Connection conn = ConectionFactory.getConnection();
+             Statement stmt = conn.createStatement()) {
             int rowsAffected = stmt.executeUpdate(sql);
-            log.info("Delete producer '{}' in the database, rows affected {}",id,rowsAffected);
+            log.info("Delete producer '{}' in the database, rows affected {}", id, rowsAffected);
         } catch (SQLException e) {
             log.error("Error while trying to insert producer '{}'", id, e);
             e.printStackTrace();
+        }
+    }
+    public static void update(String name, int id){
+        String sql = "UPDATE `anime_store`.`producer` SET `name` = '%s' WHERE (`id` = '%s');".formatted(name, id);
+        try (Connection conn = ConectionFactory.getConnection();
+        Statement stmt = conn.createStatement()){
+            int rowsAffected = stmt.executeUpdate(sql);
+            log.info("Update producer '{}' in the database, rowsaffected '{}'", id, rowsAffected);
+        } catch (SQLException e) {
+        log.error("Error while trying to insert producer '{}'", id, e);
+        e.printStackTrace();
         }
     }
 }

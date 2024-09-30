@@ -13,4 +13,10 @@ public class ProducerService {
         }
         ProducerRepository.delete(id);
     }
+    public static void update(String name, int id){
+        if(id <= 0){
+            throw new IllegalArgumentException("Invalid ID");
+        }
+        ProducerRepository.update(name, id);
+    }
 }
