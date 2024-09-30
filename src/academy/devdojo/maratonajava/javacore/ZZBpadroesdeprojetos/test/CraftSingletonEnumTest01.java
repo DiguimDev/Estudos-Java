@@ -1,7 +1,6 @@
 package academy.devdojo.maratonajava.javacore.ZZBpadroesdeprojetos.test;
 
 import academy.devdojo.maratonajava.javacore.ZZBpadroesdeprojetos.dominio.AircraftSingletonEnum;
-import academy.devdojo.maratonajava.javacore.ZZBpadroesdeprojetos.dominio.AircraftSingletonLazy;
 
 public class CraftSingletonEnumTest01 {
     public static void main(String[] args) {
