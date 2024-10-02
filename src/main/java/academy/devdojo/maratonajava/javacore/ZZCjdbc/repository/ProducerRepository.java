@@ -4,6 +4,7 @@ import academy.devdojo.maratonajava.javacore.ZZCjdbc.conn.ConectionFactory;
 import academy.devdojo.maratonajava.javacore.ZZCjdbc.dominio.Producer;
 import lombok.extern.log4j.Log4j2;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +84,32 @@ public class ProducerRepository {
                 log.info("Column type '{}'", metaData.getColumnType(i));
             }
 
+        } catch (SQLException e) {
+            log.error("Error while trying to find all services producer", e);
+        }
+    }
+    public static void showDriverMetaData(){
+        log.info("Showing Driver Metadata");
+        try (Connection conn = ConectionFactory.getConnection()){
+            DatabaseMetaData dbMetaData = conn.getMetaData();
+            if(dbMetaData.supportsResultSetType(ResultSet.TYPE_FORWARD_ONLY)){
+                log.info("Supports TYPE FORWARD ONLY");
+                if(dbMetaData.supportsResultSetConcurrency(ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_UPDATABLE)){
+                    log.info("And Supports CONCLUR_UPDATABLE");
+                }
+            }
+            if(dbMetaData.supportsResultSetType(ResultSet.TYPE_SCROLL_SENSITIVE)){
+                log.info("Supports TYPE_SCROLL_SENSITIVE");
+                if(dbMetaData.supportsResultSetConcurrency(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE)){
+                    log.info("And Supports CONCLUR_UPDATABLE");
+                }
+            }
+            if(dbMetaData.supportsResultSetType(ResultSet.TYPE_SCROLL_INSENSITIVE)){
+                log.info("Supports TYPE_SCROLL_INSENSITIVE");
+                if(dbMetaData.supportsResultSetConcurrency(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE)){
+                    log.info("And Supports CONCLUR_UPDATABLE");
+                }
+            }
         } catch (SQLException e) {
             log.error("Error while trying to find all services producer", e);
         }

@@ -26,6 +26,9 @@ public class ProducerService {
     public static void showProducerMetaData(){
          ProducerRepository.showProducerMetaData();
     }
+    public static void showDriverMetaData(){
+        ProducerRepository.showDriverMetaData();
+    }
     public static void invalidException(int id){
         if (id <= 0){
             throw new IllegalArgumentException("ID Inválido");

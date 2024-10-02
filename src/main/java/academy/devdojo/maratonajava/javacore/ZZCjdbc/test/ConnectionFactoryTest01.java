@@ -15,7 +15,8 @@ public class ConnectionFactoryTest01 {
        // ProducerService.save(producer);
         //List<Producer> producerList = ProducerService.findByName("NHK");
         //List<Producer> producerLists = ProducerService.findAll();
-        ProducerService.showProducerMetaData();
+        //ProducerService.showProducerMetaData();
+        ProducerService.showDriverMetaData();
         //log.info();
 
     }
