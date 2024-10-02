@@ -29,10 +29,16 @@ public class ProducerService {
     public static void showDriverMetaData(){
         ProducerRepository.showDriverMetaData();
     }
+    public static void showTypeScrollWorking(){
+        ProducerRepository.showTypeScrollWorking();
+    }
     public static void invalidException(int id){
         if (id <= 0){
             throw new IllegalArgumentException("ID Inválido");
         }
+    }
+    public static List<Producer> findByNameAndUpdateToUppercase(String name){
+        return ProducerRepository.findByNameAndUpdateToUppercase(name);
     }
 
 }

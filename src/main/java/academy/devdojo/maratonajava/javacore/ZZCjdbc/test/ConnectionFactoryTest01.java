@@ -16,8 +16,11 @@ public class ConnectionFactoryTest01 {
         //List<Producer> producerList = ProducerService.findByName("NHK");
         //List<Producer> producerLists = ProducerService.findAll();
         //ProducerService.showProducerMetaData();
-        ProducerService.showDriverMetaData();
+        //ProducerService.showDriverMetaData();
+        //ProducerService.showTypeScrollWorking();
         //log.info();
+        List<Producer> deen = ProducerService.findByNameAndUpdateToUppercase("Deen");
+        log.info(deen);
 
     }
 }

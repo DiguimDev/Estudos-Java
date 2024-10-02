@@ -33,29 +33,32 @@ public class ProducerRepository {
             log.error("Error while trying to insert producer '{}'", id, e);
         }
     }
-    public static void update(Producer producer){
-        String sql = "UPDATE `anime_store`.`producer` SET `name` = '%s' WHERE (`id` = '%d');".formatted(producer.getName(),producer.getId());
+
+    public static void update(Producer producer) {
+        String sql = "UPDATE `anime_store`.`producer` SET `name` = '%s' WHERE (`id` = '%d');".formatted(producer.getName(), producer.getId());
         try (Connection conn = ConectionFactory.getConnection();
-        Statement stmt = conn.createStatement()){
+             Statement stmt = conn.createStatement()) {
             int rowsAffected = stmt.executeUpdate(sql);
             log.info("Update producer '{}' in the database, rows affected '{}'", producer.getId(), rowsAffected);
         } catch (SQLException e) {
-        log.error("Error while trying to insert producer '{}'", producer.getId(), e);
+            log.error("Error while trying to insert producer '{}'", producer.getId(), e);
         }
     }
-    public static List<Producer> findAll(){
+
+    public static List<Producer> findAll() {
         log.info("Finding all producers");
         return findByName("");
     }
-    public static List<Producer> findByName(String name){
+
+    public static List<Producer> findByName(String name) {
         log.info("Finding producer");
         List<Producer> producers = new ArrayList<>();
         String sql = "SELECT * FROM anime_store.producer where name like '%s';"
                 .formatted("%" + name + "%");
         try (Connection conn = ConectionFactory.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)){
-            while(rs.next()){
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
                 Producer producer = Producer.builder()
                         .id(rs.getInt("id"))
                         .name(rs.getString("name"))
@@ -67,16 +70,17 @@ public class ProducerRepository {
         }
         return producers;
     }
-    public static void showProducerMetaData(){
+
+    public static void showProducerMetaData() {
         log.info("Showing Producer Metadata");
         String sql = "SELECT * FROM anime_store.producer;";
         try (Connection conn = ConectionFactory.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)){
+             ResultSet rs = stmt.executeQuery(sql)) {
             ResultSetMetaData metaData = rs.getMetaData();
             rs.next();
             int columnCount = metaData.getColumnCount();
-            log.info("Columns Count {}",columnCount);
+            log.info("Columns Count {}", columnCount);
             for (int i = 1; i <= columnCount; i++) {
                 log.info("Table name '{}'", metaData.getTableName(i));
                 log.info("Column name '{}'", metaData.getColumnName(i));
@@ -88,31 +92,77 @@ public class ProducerRepository {
             log.error("Error while trying to find all services producer", e);
         }
     }
-    public static void showDriverMetaData(){
+
+    public static void showDriverMetaData() {
         log.info("Showing Driver Metadata");
-        try (Connection conn = ConectionFactory.getConnection()){
+        try (Connection conn = ConectionFactory.getConnection()) {
             DatabaseMetaData dbMetaData = conn.getMetaData();
-            if(dbMetaData.supportsResultSetType(ResultSet.TYPE_FORWARD_ONLY)){
+            if (dbMetaData.supportsResultSetType(ResultSet.TYPE_FORWARD_ONLY)) {
                 log.info("Supports TYPE FORWARD ONLY");
-                if(dbMetaData.supportsResultSetConcurrency(ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_UPDATABLE)){
+                if (dbMetaData.supportsResultSetConcurrency(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE)) {
                     log.info("And Supports CONCLUR_UPDATABLE");
                 }
             }
-            if(dbMetaData.supportsResultSetType(ResultSet.TYPE_SCROLL_SENSITIVE)){
+            if (dbMetaData.supportsResultSetType(ResultSet.TYPE_SCROLL_SENSITIVE)) {
                 log.info("Supports TYPE_SCROLL_SENSITIVE");
-                if(dbMetaData.supportsResultSetConcurrency(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE)){
+                if (dbMetaData.supportsResultSetConcurrency(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
                     log.info("And Supports CONCLUR_UPDATABLE");
                 }
             }
-            if(dbMetaData.supportsResultSetType(ResultSet.TYPE_SCROLL_INSENSITIVE)){
+            if (dbMetaData.supportsResultSetType(ResultSet.TYPE_SCROLL_INSENSITIVE)) {
                 log.info("Supports TYPE_SCROLL_INSENSITIVE");
-                if(dbMetaData.supportsResultSetConcurrency(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE)){
+                if (dbMetaData.supportsResultSetConcurrency(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
                     log.info("And Supports CONCLUR_UPDATABLE");
                 }
             }
         } catch (SQLException e) {
             log.error("Error while trying to find all services producer", e);
         }
+    }
+
+    public static void showTypeScrollWorking() {
+        String sql = "SELECT * FROM anime_store.producer;";
+        try (Connection conn = ConectionFactory.getConnection();
+             Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+             ResultSet rs = stmt.executeQuery(sql)) {
+            log.info("Is on Last Line {} ", rs.last());
+            log.info("Is on Last Line? {} ", rs.isLast());
+            log.info(Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build());
+
+            log.info("Is on First Line {} ", rs.first());
+            log.info("Is on First Line {} ? ", rs.isFirst());
+            log.info(Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build());
+
+            rs.afterLast();
+            log.info("Is on Last Line {} ?", rs.isAfterLast());
+            while (rs.previous()) {
+                log.info(Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build());
+            }
+        } catch (SQLException e) {
+            log.error("Error while trying to find all services producer", e);
+        }
+    }
+    public static List<Producer> findByNameAndUpdateToUppercase(String name) {
+        log.info("Finding producer");
+        List<Producer> producers = new ArrayList<>();
+        String sql = "SELECT * FROM anime_store.producer where name like '%s';"
+                .formatted("%" + name + "%");
+        try (Connection conn = ConectionFactory.getConnection();
+             Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                rs.updateString("name",rs.getString("name").toUpperCase());
+                rs.updateRow();
+                Producer producer = Producer.builder()
+                        .id(rs.getInt("id"))
+                        .name(rs.getString("name"))
+                        .build();
+                producers.add(producer);
+            }
+        } catch (SQLException e) {
+            log.error("Error while trying to find all services producer", e);
+        }
+        return producers;
     }
 
 }
