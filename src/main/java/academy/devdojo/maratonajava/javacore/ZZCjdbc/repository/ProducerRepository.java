@@ -59,10 +59,7 @@ public class ProducerRepository {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                Producer producer = Producer.builder()
-                        .id(rs.getInt("id"))
-                        .name(rs.getString("name"))
-                        .build();
+                Producer producer = getProducer(rs);
                 producers.add(producer);
             }
         } catch (SQLException e) {
@@ -142,8 +139,9 @@ public class ProducerRepository {
             log.error("Error while trying to find all services producer", e);
         }
     }
+
     public static List<Producer> findByNameAndUpdateToUppercase(String name) {
-        log.info("Finding producer");
+        log.info("Finding and update producer");
         List<Producer> producers = new ArrayList<>();
         String sql = "SELECT * FROM anime_store.producer where name like '%s';"
                 .formatted("%" + name + "%");
@@ -151,12 +149,9 @@ public class ProducerRepository {
              Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                rs.updateString("name",rs.getString("name").toUpperCase());
+                rs.updateString("name", rs.getString("name").toUpperCase());
                 rs.updateRow();
-                Producer producer = Producer.builder()
-                        .id(rs.getInt("id"))
-                        .name(rs.getString("name"))
-                        .build();
+                Producer producer = getProducer(rs);
                 producers.add(producer);
             }
         } catch (SQLException e) {
@@ -164,5 +159,37 @@ public class ProducerRepository {
         }
         return producers;
     }
+
+    public static List<Producer> findByNameAndInsertWhenNotFound(String name) {
+        log.info("Finding and update producer");
+        List<Producer> producers = new ArrayList<>();
+        String sql = "SELECT * FROM anime_store.producer where name like '%s';"
+                .formatted("%" + name + "%");
+        try (Connection conn = ConectionFactory.getConnection();
+             Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+             ResultSet rs = stmt.executeQuery(sql)) {
+            if (!rs.next()) {
+                insertNewProducer(name, rs);
+                getProducer(rs);
+                producers.add(getProducer(rs));
+            }
+        } catch (SQLException e) {
+            log.error("Error while trying to find all services producer", e);
+        }
+        return producers;
+    }
+
+    private static void insertNewProducer(String name, ResultSet rs) throws SQLException {
+        rs.moveToInsertRow();
+        rs.updateString("name", name);
+        rs.insertRow();
+        rs.beforeFirst();
+        rs.next();
+    }
+
+    private static Producer getProducer(ResultSet rs) throws SQLException {
+        return Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build();
+    }
+
 
 }

@@ -19,8 +19,9 @@ public class ConnectionFactoryTest01 {
         //ProducerService.showDriverMetaData();
         //ProducerService.showTypeScrollWorking();
         //log.info();
-        List<Producer> deen = ProducerService.findByNameAndUpdateToUppercase("Deen");
-        log.info(deen);
+        //List<Producer> deen = ProducerService.findByNameAndUpdateToUppercase("Deen");
+        List<Producer> producers = ProducerService.findByNameAndInsertWhenNotFound("A1 pictures");
+        log.info(producers);
 
     }
 }
