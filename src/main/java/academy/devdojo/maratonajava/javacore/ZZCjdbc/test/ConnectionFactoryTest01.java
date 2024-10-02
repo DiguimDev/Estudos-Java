@@ -5,12 +5,15 @@ import academy.devdojo.maratonajava.javacore.ZZCjdbc.service.ProducerService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
+
 public class ConnectionFactoryTest01 {
     private static final Logger log = LogManager.getLogger(ConnectionFactoryTest01.class);
 
     public static void main(String[] args) {
-        Producer producer = Producer.builder().name("Studio Deen").build();
-       // ProducerService.update("Toei", 1);
-        ProducerService.save(producer);
+       // Producer producer = Producer.builder().name("Studios Gible").build();
+       // ProducerService.save(producer);
+        List<Producer> producerList = ProducerService.findAll();
+        log.info(producerList);
     }
 }
