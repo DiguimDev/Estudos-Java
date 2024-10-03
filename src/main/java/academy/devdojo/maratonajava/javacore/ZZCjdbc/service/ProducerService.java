@@ -17,6 +17,10 @@ public class ProducerService {
         invalidException(producer.getId());
         ProducerRepository.update(producer);
     }
+    public static void updatePreparedStatement(Producer producer){
+        invalidException(producer.getId());
+        ProducerRepository.updatePrearedStatement(producer);
+    }
     public static List<Producer> findAll(){
         return ProducerRepository.findAll();
     }

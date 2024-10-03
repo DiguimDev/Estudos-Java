@@ -4,7 +4,6 @@ import academy.devdojo.maratonajava.javacore.ZZCjdbc.conn.ConectionFactory;
 import academy.devdojo.maratonajava.javacore.ZZCjdbc.dominio.Producer;
 import lombok.extern.log4j.Log4j2;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +43,22 @@ public class ProducerRepository {
             log.error("Error while trying to insert producer '{}'", producer.getId(), e);
         }
     }
+    public static void updatePrearedStatement(Producer producer) {
+        try (Connection conn = ConectionFactory.getConnection();
+             PreparedStatement ps = preparedStatementUpdate(conn, producer)) {
+            int rowsAffected = ps.executeUpdate();
+            log.info("Update producer '{}' in the database, rows affected '{}'", producer.getId(), rowsAffected);
+        } catch (SQLException e) {
+            log.error("Error while trying to insert producer '{}'", producer.getId(), e);
+        }
+    }
+    private static PreparedStatement preparedStatementUpdate(Connection connection, Producer producer) throws SQLException {
+        String sql = "UPDATE `anime_store`.`producer` SET `name` = ? WHERE (`id` = ?);";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, producer.getName());
+        preparedStatement.setInt(2, producer.getId());
+        return preparedStatement;
+    }
 
     public static List<Producer> findAll() {
         log.info("Finding all producers");
@@ -71,9 +86,8 @@ public class ProducerRepository {
     public static List<Producer> findByNamePreparedStatement(String name) {
         log.info("Finding producer by name");
         List<Producer> producers = new ArrayList<>();
-        String sql = "SELECT * FROM anime_store.producer where name like ?;";
         try (Connection conn = ConectionFactory.getConnection();
-             PreparedStatement ps = cretedPreperadeStatement(conn, sql, name);
+             PreparedStatement ps = preperadeStatementFindByName(conn, name);
              ResultSet rs = ps.executeQuery();
         ) {
             while (rs.next()) {
@@ -86,9 +100,10 @@ public class ProducerRepository {
         return producers;
     }
 
-    private static PreparedStatement cretedPreperadeStatement(Connection connection, String sql, String name) throws SQLException {
+    private static PreparedStatement preperadeStatementFindByName(Connection connection, String name) throws SQLException {
+        String sql = "SELECT * FROM anime_store.producer where name like ?;";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, name);
+        preparedStatement.setString(1, String.format("%%%s%%",name));
         return preparedStatement;
     }
 

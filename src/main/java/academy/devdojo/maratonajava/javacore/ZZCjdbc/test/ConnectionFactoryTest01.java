@@ -11,6 +11,7 @@ public class ConnectionFactoryTest01 {
     private static final Logger log = LogManager.getLogger(ConnectionFactoryTest01.class);
 
     public static void main(String[] args) {
+        Producer producer = Producer.builder().id(1).name("toei").build();
        // Producer producer = Producer.builder().name("Studios Gible").build();
        // ProducerService.save(producer);
         //List<Producer> producerList = ProducerService.findByName("NHK");
@@ -21,8 +22,8 @@ public class ConnectionFactoryTest01 {
         //log.info();
         //List<Producer> deen = ProducerService.findByNameAndUpdateToUppercase("Deen");
 //        List<Producer> producers = ProducerService.findByNameAndInsertWhenNotFound("A1 pictures");
-        List<Producer> producer = ProducerService.findByNamePreparedStatement("Bones");
-        log.info("producer found '{}'", producer);
-
+        //List<Producer> producer = ProducerService.findByNamePreparedStatement("Bo");
+        //log.info("producer found '{}'", producer);
+        ProducerService.updatePreparedStatement(producer);
     }
 }
