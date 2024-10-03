@@ -20,8 +20,9 @@ public class ConnectionFactoryTest01 {
         //ProducerService.showTypeScrollWorking();
         //log.info();
         //List<Producer> deen = ProducerService.findByNameAndUpdateToUppercase("Deen");
-        List<Producer> producers = ProducerService.findByNameAndInsertWhenNotFound("A1 pictures");
-        log.info(producers);
+//        List<Producer> producers = ProducerService.findByNameAndInsertWhenNotFound("A1 pictures");
+        List<Producer> producer = ProducerService.findByNamePreparedStatement("Bones");
+        log.info("producer found '{}'", producer);
 
     }
 }
