@@ -24,6 +24,8 @@ public class ConnectionFactoryTest01 {
 //        List<Producer> producers = ProducerService.findByNameAndInsertWhenNotFound("A1 pictures");
         //List<Producer> producer = ProducerService.findByNamePreparedStatement("Bo");
         //log.info("producer found '{}'", producer);
-        ProducerService.updatePreparedStatement(producer);
+//
+        List<Producer> producers = ProducerService.findByNameCallableStatement("Bo");
+        log.info("Producers found '{}'", producers);
     }
 }
