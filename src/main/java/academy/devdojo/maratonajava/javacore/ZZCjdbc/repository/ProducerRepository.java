@@ -145,7 +145,7 @@ public class ProducerRepository {
                 log.info("Table name '{}'", metaData.getTableName(i));
                 log.info("Column name '{}'", metaData.getColumnName(i));
                 log.info("Column size '{}'", metaData.getColumnDisplaySize(i));
-                log.info("Column type '{}'", metaData.getColumnType(i));
+                log.info("Column type '{}'", metaData.getColumnTypeName(i));
             }
 
         } catch (SQLException e) {
