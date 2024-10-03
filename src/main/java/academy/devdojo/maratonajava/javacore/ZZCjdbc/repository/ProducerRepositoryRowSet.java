@@ -4,6 +4,7 @@ import academy.devdojo.maratonajava.javacore.ZZCjdbc.conn.ConectionFactory;
 import academy.devdojo.maratonajava.javacore.ZZCjdbc.dominio.Producer;
 import academy.devdojo.maratonajava.javacore.ZZCjdbc.listener.CustomRowSetListener;
 
+import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.JdbcRowSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -55,6 +56,22 @@ public class ProducerRepositoryRowSet {
             if(!jrs.next()) return;
             jrs.updateString("name", producer.getName());
             jrs.updateRow();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateCachedRowSet(Producer producer){
+        String sql = "SELECT * FROM producer WHERE (`id` = ?);";
+        try(CachedRowSet cs = ConectionFactory.getCachedRowSet();
+        Connection connection = ConectionFactory.getConnection()){
+            connection.setAutoCommit(false);
+            cs.setCommand(sql);
+            cs.setInt(1, producer.getId());
+            cs.execute(connection);
+            if(!cs.next()) return;
+            cs.updateString("name", producer.getName());
+            cs.updateRow();
+            cs.acceptChanges();
         } catch (SQLException e) {
             e.printStackTrace();
         }
